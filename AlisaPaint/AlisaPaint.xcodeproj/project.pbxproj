@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F5ADD9E7190132C1005D1B5C /* AlisaView.m in Sources */ = {isa = PBXBuildFile; fileRef = F5ADD9E6190132C1005D1B5C /* AlisaView.m */; };
 		F5D673591900100200E7D1FE /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F5D673581900100200E7D1FE /* Foundation.framework */; };
 		F5D6735B1900100200E7D1FE /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F5D6735A1900100200E7D1FE /* CoreGraphics.framework */; };
 		F5D6735D1900100200E7D1FE /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F5D6735C1900100200E7D1FE /* UIKit.framework */; };
@@ -34,6 +35,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		F5ADD9E5190132C1005D1B5C /* AlisaView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlisaView.h; sourceTree = "<group>"; };
+		F5ADD9E6190132C1005D1B5C /* AlisaView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlisaView.m; sourceTree = "<group>"; };
 		F5D673551900100200E7D1FE /* AlisaPaint.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AlisaPaint.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F5D673581900100200E7D1FE /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		F5D6735A1900100200E7D1FE /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -113,6 +116,8 @@
 			isa = PBXGroup;
 			children = (
 				F5D6736A1900100200E7D1FE /* Main.storyboard */,
+				F5ADD9E5190132C1005D1B5C /* AlisaView.h */,
+				F5ADD9E6190132C1005D1B5C /* AlisaView.m */,
 				F5D6736D1900100200E7D1FE /* AlisaViewController.h */,
 				F5D6736E1900100200E7D1FE /* AlisaViewController.m */,
 				F5D673701900100200E7D1FE /* Images.xcassets */,
@@ -253,6 +258,7 @@
 				F5D673651900100200E7D1FE /* main.m in Sources */,
 				F5D6736F1900100200E7D1FE /* AlisaViewController.m in Sources */,
 				F5D673691900100200E7D1FE /* AlisaAppDelegate.m in Sources */,
+				F5ADD9E7190132C1005D1B5C /* AlisaView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -457,6 +463,7 @@
 				F5D673891900100200E7D1FE /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		F5D6738A1900100200E7D1FE /* Build configuration list for PBXNativeTarget "AlisaPaintTests" */ = {
 			isa = XCConfigurationList;
@@ -465,6 +472,7 @@
 				F5D6738C1900100200E7D1FE /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

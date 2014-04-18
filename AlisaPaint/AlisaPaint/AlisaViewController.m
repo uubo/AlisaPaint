@@ -7,23 +7,19 @@
 //
 
 #import "AlisaViewController.h"
+#import "AlisaView.h"
 
 @interface AlisaViewController ()
+@property (weak, nonatomic) IBOutlet AlisaView *alisaView;
 
 @end
 
 @implementation AlisaViewController
 
-- (void)viewDidLoad
+- (IBAction)tap:(UITapGestureRecognizer *)sender
 {
-    [super viewDidLoad];
-	// Do any additional setup after loading the view, typically from a nib.
-}
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+    CGPoint touchPoint = [sender locationInView:self.alisaView];
+    [self.alisaView addPoint:touchPoint];
 }
 
 @end
