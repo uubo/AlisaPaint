@@ -11,15 +11,42 @@
 
 @interface AlisaViewController ()
 @property (weak, nonatomic) IBOutlet AlisaView *alisaView;
-
+@property (strong, nonatomic) UIColor *activeColor;
 @end
 
 @implementation AlisaViewController
 
+- (UIColor *)activeColor
+{
+    if (!_activeColor) {
+        _activeColor = [[UIColor alloc] init];
+    }
+    return _activeColor;
+}
+
 - (IBAction)tap:(UITapGestureRecognizer *)sender
 {
-    CGPoint touchPoint = [sender locationInView:self.alisaView];
-    [self.alisaView addPoint:touchPoint];
+    CGPoint gesturePoint = [sender locationInView:self.alisaView];
+    [self.alisaView addPoint:gesturePoint];
+}
+
+- (IBAction)pan:(UIPanGestureRecognizer *)sender
+{
+    /*CGPoint gesturePoint = [sender locationInView:self.gameView];
+    if (sender.state == UIGestureRecognizerStateBegan) {
+        [self attachDroppingViewToPoint:gesturePoint];
+    } else if (sender.state == UIGestureRecognizerStateChanged) {
+        self.attachment.anchorPoint = gesturePoint;
+    } else if (sender.state == UIGestureRecognizerStateEnded) {
+        [self.animator removeBehavior:self.attachment];
+    }*/
+    CGPoint gesturePoint = [sender locationInView:self.alisaView];
+    [self.alisaView addPoint:gesturePoint];
+}
+
+- (IBAction)colorChosen:(UIButton *)sender
+{
+    self.activeColor = sender.backgroundColor;
 }
 
 @end

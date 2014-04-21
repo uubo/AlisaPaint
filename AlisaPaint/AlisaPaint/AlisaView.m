@@ -9,7 +9,7 @@
 #import "AlisaView.h"
 
 @interface AlisaView ()
-@property (strong, nonatomic) NSMutableArray *points;
+@property (strong, nonatomic) NSMutableArray *points; // of NSValues with CGPoint inside;
 @end
 
 @implementation AlisaView
@@ -56,9 +56,9 @@
         }
     }
     [[UIColor redColor] setFill];
-    [[UIColor blackColor] setStroke];
+    //[[UIColor blackColor] setStroke];
     [path fill];
-    [path stroke];
+    //[path stroke];
 }
 
 
