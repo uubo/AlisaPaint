@@ -10,4 +10,7 @@
 
 @interface AlisaPoint : AlisaFigure
 @property (nonatomic) CGPoint point;
+
+- (instancetype)initWithColor:(UIColor *)color point:(CGPoint)point;
+
 @end

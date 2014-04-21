@@ -11,6 +11,7 @@
 @interface AlisaFigure : NSObject
 @property (strong, nonatomic) UIColor *color;
 
+- (instancetype)initWithColor:(UIColor *)color;
 - (void)draw;
 
 @end

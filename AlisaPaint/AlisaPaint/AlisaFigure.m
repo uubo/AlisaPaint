@@ -10,6 +10,15 @@
 
 @implementation AlisaFigure
 
+- (instancetype)initWithColor:(UIColor *)color
+{
+    self = [super init];
+    if (self) {
+        self.color = color;
+    }
+    return self;
+}
+
 - (void)draw
 {
     

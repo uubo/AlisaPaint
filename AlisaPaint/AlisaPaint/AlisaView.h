@@ -7,9 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "AlisaFigure.h"
 
 @interface AlisaView : UIView
 
-- (void)addPoint:(CGPoint)point;
+- (void)addFigure:(AlisaFigure *)figure;
 
 @end

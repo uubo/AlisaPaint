@@ -8,6 +8,7 @@
 
 #import "AlisaViewController.h"
 #import "AlisaView.h"
+#import "AlisaPoint.h"
 
 @interface AlisaViewController ()
 @property (weak, nonatomic) IBOutlet AlisaView *alisaView;
@@ -19,7 +20,7 @@
 - (UIColor *)activeColor
 {
     if (!_activeColor) {
-        _activeColor = [[UIColor alloc] init];
+        _activeColor = [UIColor blackColor];
     }
     return _activeColor;
 }
@@ -27,7 +28,7 @@
 - (IBAction)tap:(UITapGestureRecognizer *)sender
 {
     CGPoint gesturePoint = [sender locationInView:self.alisaView];
-    [self.alisaView addPoint:gesturePoint];
+    [self.alisaView addFigure:[[AlisaPoint alloc] initWithColor:self.activeColor point:gesturePoint]];
 }
 
 - (IBAction)pan:(UIPanGestureRecognizer *)sender
@@ -40,8 +41,8 @@
     } else if (sender.state == UIGestureRecognizerStateEnded) {
         [self.animator removeBehavior:self.attachment];
     }*/
-    CGPoint gesturePoint = [sender locationInView:self.alisaView];
-    [self.alisaView addPoint:gesturePoint];
+    //CGPoint gesturePoint = [sender locationInView:self.alisaView];
+    //[self.alisaView addPoint:gesturePoint];
 }
 
 - (IBAction)colorChosen:(UIButton *)sender

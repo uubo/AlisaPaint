@@ -9,24 +9,23 @@
 #import "AlisaView.h"
 
 @interface AlisaView ()
-@property (strong, nonatomic) NSMutableArray *points; // of NSValues with CGPoint inside;
+@property (strong, nonatomic) NSMutableArray *figures; // of NSValues with CGPoint inside;
 @end
 
 @implementation AlisaView
 
-- (void)addPoint:(CGPoint)point
+- (void)addFigure:(AlisaFigure *)figure
 {
-    NSValue *boxedPoint = [NSValue valueWithBytes:&point objCType:@encode(CGPoint)];
-    [self.points addObject:boxedPoint];
+    [self.figures addObject:figure];
     [self setNeedsDisplay];
 }
 
-- (NSMutableArray *)points
+- (NSMutableArray *)figures
 {
-    if (!_points) {
-        _points = [[NSMutableArray alloc] init];
+    if (!_figures) {
+        _figures = [[NSMutableArray alloc] init];
     }
-    return _points;
+    return _figures;
 }
 
 - (id)initWithFrame:(CGRect)frame
@@ -38,27 +37,11 @@
     return self;
 }
 
-#define RADIUS 0.5
-#define SIDE 10
-
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
 - (void)drawRect:(CGRect)rect
 {
-    UIBezierPath *path = [[UIBezierPath alloc] init];
-    for (NSValue *boxedPoint in self.points) {
-        if (strcmp([boxedPoint objCType], @encode(CGPoint)) == 0) {
-            CGPoint center;
-            [boxedPoint getValue:&center];
-            [path moveToPoint:CGPointMake(center.x+RADIUS, center.y)];
-            //[path addArcWithCenter:center radius:RADIUS startAngle:0 endAngle:2*M_PI clockwise:YES];
-            [path appendPath:[UIBezierPath bezierPathWithOvalInRect:CGRectMake(center.x-SIDE/2, center.y-SIDE/2, SIDE, SIDE)]];
-        }
+    for (AlisaFigure *figure in self.figures) {
+        [figure draw];
     }
-    [[UIColor redColor] setFill];
-    //[[UIColor blackColor] setStroke];
-    [path fill];
-    //[path stroke];
 }
 
 
