@@ -8,6 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
+typedef enum : NSUInteger {
+    AlisaPointType,
+    AlisaLineType,
+    AlisaRectType,
+} AlisaFigureType;
+
 @interface AlisaViewController : UIViewController
 
 @end
