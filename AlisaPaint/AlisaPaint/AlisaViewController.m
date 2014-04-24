@@ -41,6 +41,8 @@
     CGPoint gesturePoint = [sender locationInView:self.alisaView];
     
     switch (self.figureType) {
+        case AlisaMoveType:
+            break;
         case AlisaLineType:
             if (sender.state == UIGestureRecognizerStateBegan) {
                 firstPoint = gesturePoint;
@@ -72,13 +74,10 @@
 {
     int index = [self.figureButtons indexOfObject:sender];
     switch (index) {
-        case 0:
-            self.figureType = AlisaPointType;
-            break;
-        case 1:
-            self.figureType = AlisaLineType;
-        default:
-            break;
+        case 0: self.figureType = AlisaMoveType; break;
+        case 1: self.figureType = AlisaPointType; break;
+        case 2: self.figureType = AlisaLineType; break;
+        default: break;
     }
 }
 

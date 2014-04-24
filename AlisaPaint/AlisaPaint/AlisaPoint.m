@@ -16,14 +16,14 @@
 {
     self = [super initWithColor:color];
     if (self) {
-        self.point = point;
+        self.point = [AlisaFigure scaledPoint:point];
     }
     return self;
 }
 
 - (void)draw
 {
-    UIBezierPath *path = [UIBezierPath bezierPathWithArcCenter:[AlisaFigure scaledPoint:self.point]
+    UIBezierPath *path = [UIBezierPath bezierPathWithArcCenter:self.point
                                                         radius:RADIUS * [AlisaFigure scale]
                                                     startAngle:0
                                                       endAngle:2*M_PI

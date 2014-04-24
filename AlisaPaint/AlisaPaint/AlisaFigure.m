@@ -19,19 +19,31 @@
     return self;
 }
 
-- (void)draw
-{
-    
-}
+- (void)draw {}
 
 + (CGFloat)scale
 {
     return [UIScreen mainScreen].scale;
 }
 
++ (CGAffineTransform)scaleAffineTransform
+{
+    return CGAffineTransformMakeScale([AlisaFigure scale], [AlisaFigure scale]);
+}
+
 + (CGPoint)scaledPoint:(CGPoint)point
 {
-    return CGPointApplyAffineTransform(point, CGAffineTransformMakeScale([AlisaFigure scale], [AlisaFigure scale]));
+    return CGPointApplyAffineTransform(point, [AlisaFigure scaleAffineTransform]);
+}
+
++ (CGSize)scaledSize:(CGSize)size
+{
+    return CGSizeApplyAffineTransform(size, [AlisaFigure scaleAffineTransform]);
+}
+
++ (CGRect)scaledRect:(CGRect)rect
+{
+    return CGRectApplyAffineTransform(rect, [AlisaFigure scaleAffineTransform]);
 }
 
 @end

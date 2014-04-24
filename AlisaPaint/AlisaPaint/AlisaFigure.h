@@ -14,6 +14,9 @@
 - (instancetype)initWithColor:(UIColor *)color;
 - (void)draw;
 + (CGFloat)scale;
++ (CGAffineTransform)scaleAffineTransform;
 + (CGPoint)scaledPoint:(CGPoint)point;
++ (CGSize)scaledSize:(CGSize)size;
++ (CGRect)scaledRect:(CGRect)rect;
 
 @end

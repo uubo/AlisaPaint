@@ -12,5 +12,7 @@
 @interface AlisaView : UIImageView
 
 - (void)addFigure:(AlisaFigure *)figure;
+- (void)move:(CGPoint)translation;
+- (void)scale:(CGFloat)scale;
 
 @end
