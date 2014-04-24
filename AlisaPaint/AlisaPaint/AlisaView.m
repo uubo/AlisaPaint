@@ -10,6 +10,7 @@
 
 @interface AlisaView ()
 @property (strong, nonatomic) NSMutableArray *figures; // of NSValues with CGPoint inside;
+@property (readwrite, nonatomic) CGFloat scale;
 @end
 
 @implementation AlisaView
@@ -17,7 +18,30 @@
 - (void)addFigure:(AlisaFigure *)figure
 {
     [self.figures addObject:figure];
-    [self setNeedsDisplay];
+    //[self setNeedsDisplay];
+    
+    __weak typeof(self) weakSelf = self;
+    dispatch_queue_t onImageDrawingQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+    
+    dispatch_async(onImageDrawingQueue, ^{
+        UIGraphicsBeginImageContext(CGSizeApplyAffineTransform(weakSelf.bounds.size,
+                                                               CGAffineTransformMakeScale([AlisaFigure scale], [AlisaFigure scale])));
+        
+        CGContextRef context = UIGraphicsGetCurrentContext();
+        UIGraphicsPushContext(context);
+        for (AlisaFigure *figure in weakSelf.figures) {
+            [figure draw];
+        }
+        UIGraphicsPopContext();
+        
+        UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
+        UIGraphicsEndImageContext();
+        
+        dispatch_queue_t mainQueue = dispatch_get_main_queue();
+        dispatch_async(mainQueue, ^{
+            weakSelf.image = newImage;
+        });
+    });
 }
 
 - (NSMutableArray *)figures
@@ -32,17 +56,17 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        // Initialization code
     }
     return self;
 }
 
+/*
 - (void)drawRect:(CGRect)rect
 {
     for (AlisaFigure *figure in self.figures) {
         [figure draw];
     }
-}
+}*/
 
 
 @end

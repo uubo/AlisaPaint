@@ -23,10 +23,11 @@
 - (void)draw
 {
     UIBezierPath *path = [[UIBezierPath alloc] init];
-    [path moveToPoint:self.point1];
-    [path addLineToPoint:self.point2];
+    [path moveToPoint:[AlisaFigure scaledPoint:self.point1]];
+    [path addLineToPoint:[AlisaFigure scaledPoint:self.point2]];
     
     [self.color setStroke];
+    path.lineWidth *= [AlisaFigure scale];
     [path stroke];
 }
 

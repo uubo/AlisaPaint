@@ -24,4 +24,14 @@
     
 }
 
++ (CGFloat)scale
+{
+    return [UIScreen mainScreen].scale;
+}
+
++ (CGPoint)scaledPoint:(CGPoint)point
+{
+    return CGPointApplyAffineTransform(point, CGAffineTransformMakeScale([AlisaFigure scale], [AlisaFigure scale]));
+}
+
 @end

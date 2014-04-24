@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "AlisaFigure.h"
 
-@interface AlisaView : UIView
+@interface AlisaView : UIImageView
 
 - (void)addFigure:(AlisaFigure *)figure;
 
