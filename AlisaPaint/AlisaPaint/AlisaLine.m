@@ -14,8 +14,8 @@
 {
     self = [super initWithColor:color];
     if (self) {
-        self.point1 = [AlisaFigure scaledPoint:point1];
-        self.point2 = [AlisaFigure scaledPoint:point2];
+        self.point1 = point1;
+        self.point2 = point2;
     }
     return self;
 }
@@ -27,7 +27,6 @@
     [path addLineToPoint:self.point2];
     
     [self.color setStroke];
-    path.lineWidth *= [AlisaFigure scale];
     [path stroke];
 }
 

@@ -16,7 +16,7 @@
 {
     self = [super initWithColor:color];
     if (self) {
-        self.point = [AlisaFigure scaledPoint:point];
+        self.point = point;
     }
     return self;
 }
@@ -24,12 +24,19 @@
 - (void)draw
 {
     UIBezierPath *path = [UIBezierPath bezierPathWithArcCenter:self.point
-                                                        radius:RADIUS * [AlisaFigure scale]
+                                                        radius:RADIUS
                                                     startAngle:0
                                                       endAngle:2*M_PI
                                                      clockwise:YES];
     [self.color setFill];
     [path fill];
+}
+
+- (void)transform:(CGPoint)currentImagePoint;
+{
+    CGPoint transformedPoint = CGPointMake(currentImagePoint.x + self.point.x,
+                                           currentImagePoint.y + self.point.y);
+    self.point = transformedPoint;
 }
 
 @end

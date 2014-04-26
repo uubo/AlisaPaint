@@ -21,6 +21,9 @@
 
 - (void)draw {}
 
+- (void)transform:(CGPoint)currentImagePoint; {}
+
+/*
 + (CGFloat)scale
 {
     return [UIScreen mainScreen].scale;
@@ -45,5 +48,6 @@
 {
     return CGRectApplyAffineTransform(rect, [AlisaFigure scaleAffineTransform]);
 }
+*/
 
 @end

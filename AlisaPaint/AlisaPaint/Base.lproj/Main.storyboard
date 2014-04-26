@@ -16,16 +16,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Eu5-yO-1oi" customClass="AlisaView">
-                                <rect key="frame" x="0.0" y="68" width="320" height="344"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                                <gestureRecognizers/>
-                                <connections>
-                                    <outletCollection property="gestureRecognizers" destination="v9D-Kl-PgQ" appends="YES" id="uGk-zy-rHF"/>
-                                    <outletCollection property="gestureRecognizers" destination="eQH-eT-Wfd" appends="YES" id="gVc-3w-ipO"/>
-                                </connections>
-                            </view>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4UK-3Z-fqx">
                                 <rect key="frame" x="20" y="420" width="40" height="40"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -122,11 +112,29 @@
                                     <action selector="figureChosen:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="yZH-Fo-dTJ"/>
                                 </connections>
                             </button>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="OkG-6s-Bkr">
+                                <rect key="frame" x="0.0" y="68" width="320" height="344"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Eu5-yO-1oi" customClass="AlisaView">
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="344"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                        <gestureRecognizers/>
+                                        <connections>
+                                            <outletCollection property="gestureRecognizers" destination="v9D-Kl-PgQ" appends="YES" id="uGk-zy-rHF"/>
+                                            <outletCollection property="gestureRecognizers" destination="eQH-eT-Wfd" appends="YES" id="gVc-3w-ipO"/>
+                                        </connections>
+                                    </view>
+                                </subviews>
+                            </scrollView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <connections>
                         <outlet property="alisaView" destination="Eu5-yO-1oi" id="83Y-dQ-avq"/>
+                        <outlet property="panRecognizer" destination="eQH-eT-Wfd" id="aJV-t2-fM7"/>
+                        <outlet property="scrollView" destination="OkG-6s-Bkr" id="4wp-0z-BCH"/>
                         <outletCollection property="figureButtons" destination="FKv-JZ-cAN" id="4Qa-44-v7F"/>
                         <outletCollection property="figureButtons" destination="L82-8w-jtO" id="OY2-Aj-VzG"/>
                         <outletCollection property="figureButtons" destination="cIS-Ye-0fZ" id="8cL-Vi-sOn"/>
