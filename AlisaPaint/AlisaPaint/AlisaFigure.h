@@ -8,18 +8,18 @@
 
 #import <Foundation/Foundation.h>
 
-@interface AlisaFigure : NSObject
-@property (strong, nonatomic) UIColor *color;
+typedef struct {
+    CGFloat r;
+    CGFloat g;
+    CGFloat b;
+    CGFloat a;
+} AlisaRGBA;
 
-- (instancetype)initWithColor:(UIColor *)color;
-- (void)draw;
-- (void)transform:(CGPoint)currentImagePoint;
-/*
-+ (CGFloat)scale;
-+ (CGAffineTransform)scaleAffineTransform;
-+ (CGPoint)scaledPoint:(CGPoint)point;
-+ (CGSize)scaledSize:(CGSize)size;
-+ (CGRect)scaledRect:(CGRect)rect;
- */
+AlisaRGBA AlisaRGBAMake(CGFloat r, CGFloat g, CGFloat b, CGFloat a);
+
+@interface AlisaFigure : NSObject
+@property (nonatomic) AlisaRGBA rgba;
+
+- (instancetype)initWithRGBA:(AlisaRGBA)rgba;
 
 @end

@@ -7,6 +7,8 @@
 //
 
 #import "AlisaView.h"
+#import "AlisaPoint.h"
+#import "AlisaLine.h"
 
 @interface AlisaView ()
 @property (strong, nonatomic) NSMutableArray *figures; // of NSValues with CGPoint inside;
@@ -14,14 +16,7 @@
 
 @implementation AlisaView
 
-
-- (NSMutableArray *)figures
-{
-    if (!_figures) {
-        _figures = [[NSMutableArray alloc] init];
-    }
-    return _figures;
-}
+#pragma mark Drawing
 
 - (void)addFigure:(AlisaFigure *)figure
 {
@@ -34,7 +29,7 @@
         UIGraphicsBeginImageContextWithOptions(weakSelf.bounds.size, NO, [UIScreen mainScreen].scale);
         
         for (AlisaFigure *figure in weakSelf.figures) {
-            [figure draw];
+            [self drawFigure:figure];
         }
         
         UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
@@ -45,6 +40,40 @@
             weakSelf.image = newImage;
         });
     });
+}
+
+- (void)drawFigure:(AlisaFigure *)figure
+{
+    if ([figure isMemberOfClass:[AlisaPoint class]]) {
+        AlisaPoint *alisaPoint = (AlisaPoint *)figure;
+        [self drawPoint:alisaPoint];
+    } else if ([figure isMemberOfClass:[AlisaLine class]]){
+        AlisaLine *alisaLine = (AlisaLine *)figure;
+        [self drawLine:alisaLine];
+    }
+}
+
+#define RADIUS 5
+
+- (void)drawPoint:(AlisaPoint *)alisaPoint
+{
+    UIBezierPath *path = [UIBezierPath bezierPathWithArcCenter:alisaPoint.point
+                                                        radius:RADIUS
+                                                    startAngle:0
+                                                      endAngle:2*M_PI
+                                                     clockwise:YES];
+    [[UIColor colorWithRed:alisaPoint.rgba.r green:alisaPoint.rgba.g blue:alisaPoint.rgba.b alpha:alisaPoint.rgba.a] setFill];
+    [path fill];
+}
+
+- (void)drawLine:(AlisaLine *)alisaLine
+{
+    UIBezierPath *path = [[UIBezierPath alloc] init];
+    [path moveToPoint:alisaLine.point1];
+    [path addLineToPoint:alisaLine.point2];
+    
+    [[UIColor colorWithRed:alisaLine.rgba.r green:alisaLine.rgba.g blue:alisaLine.rgba.b alpha:alisaLine.rgba.a] setStroke];
+    [path stroke];
 }
 
 #pragma mark Initialization
@@ -72,5 +101,12 @@
     [self sizeToFit];
 }
 
+- (NSMutableArray *)figures
+{
+    if (!_figures) {
+        _figures = [[NSMutableArray alloc] init];
+    }
+    return _figures;
+}
 
 @end

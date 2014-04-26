@@ -22,15 +22,27 @@
 
 @implementation AlisaViewController
 
+- (UIColor *)activeColor
+{
+    if (!_activeColor) {
+        _activeColor = [UIColor blackColor];
+    }
+    return _activeColor;
+}
+- (AlisaRGBA)activeColorRGBA
+{
+    CGFloat r, g, b, a;
+    [self.activeColor getRed:&r green:&g blue:&g alpha:&a];
+    return AlisaRGBAMake(r, g, b, a);
+}
+
 - (void)setScrollView:(UIScrollView *)scrollView
 {
     _scrollView = scrollView;
     self.scrollView.minimumZoomScale = 1.0;
     self.scrollView.maximumZoomScale = 4.0;
     self.scrollView.delegate = self;
-    CGSize boundsSize = self.alisaView.bounds.size;
-    CGSize imageSize = self.alisaView.image.size;
-    self.scrollView.contentSize = self.alisaView ? self.alisaView.image.size : CGSizeZero;
+    self.scrollView.contentSize = self.alisaView ? self.alisaView.bounds.size : CGSizeZero;
 }
 
 - (UIView *)viewForZoomingInScrollView:(UIScrollView *)scrollView
@@ -44,7 +56,7 @@
     
     switch (self.figureType) {
         case AlisaPointType:
-            [self.alisaView addFigure:[[AlisaPoint alloc]initWithColor:self.activeColor point:gesturePoint]];
+            [self.alisaView addFigure:[[AlisaPoint alloc]initWithRGBA:[self activeColorRGBA] point:gesturePoint]];
             break;
             
         default:
@@ -62,15 +74,15 @@
             if (recognizer.state == UIGestureRecognizerStateBegan) {
                 firstPoint = gesturePoint;
             } else if (recognizer.state == UIGestureRecognizerStateChanged) {
-                AlisaLine *line = [[AlisaLine alloc]initWithColor:self.activeColor
-                                                           point1:firstPoint
-                                                           point2:gesturePoint];
+                AlisaLine *line = [[AlisaLine alloc]initWithRGBA:[self activeColorRGBA]
+                                                          point1:firstPoint
+                                                          point2:gesturePoint];
                 [self.alisaView addFigure:line];
                 firstPoint = gesturePoint;
             } else if (recognizer.state == UIGestureRecognizerStateEnded) {
-                AlisaLine *line = [[AlisaLine alloc]initWithColor:self.activeColor
-                                                           point1:firstPoint
-                                                           point2:gesturePoint];
+                AlisaLine *line = [[AlisaLine alloc]initWithRGBA:[self activeColorRGBA]
+                                                          point1:firstPoint
+                                                          point2:gesturePoint];
                 [self.alisaView addFigure:line];
             }
             break;

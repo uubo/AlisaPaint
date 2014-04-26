@@ -8,46 +8,25 @@
 
 #import "AlisaFigure.h"
 
+AlisaRGBA AlisaRGBAMake(CGFloat r, CGFloat g, CGFloat b, CGFloat a)
+{
+    AlisaRGBA rgba;
+    rgba.r = r;
+    rgba.g = g;
+    rgba.b = b;
+    rgba.a = a;
+    return rgba;
+}
+
 @implementation AlisaFigure
 
-- (instancetype)initWithColor:(UIColor *)color
+- (instancetype)initWithRGBA:(AlisaRGBA)rgba
 {
     self = [super init];
     if (self) {
-        self.color = color;
+        self.rgba = rgba;
     }
     return self;
 }
-
-- (void)draw {}
-
-- (void)transform:(CGPoint)currentImagePoint; {}
-
-/*
-+ (CGFloat)scale
-{
-    return [UIScreen mainScreen].scale;
-}
-
-+ (CGAffineTransform)scaleAffineTransform
-{
-    return CGAffineTransformMakeScale([AlisaFigure scale], [AlisaFigure scale]);
-}
-
-+ (CGPoint)scaledPoint:(CGPoint)point
-{
-    return CGPointApplyAffineTransform(point, [AlisaFigure scaleAffineTransform]);
-}
-
-+ (CGSize)scaledSize:(CGSize)size
-{
-    return CGSizeApplyAffineTransform(size, [AlisaFigure scaleAffineTransform]);
-}
-
-+ (CGRect)scaledRect:(CGRect)rect
-{
-    return CGRectApplyAffineTransform(rect, [AlisaFigure scaleAffineTransform]);
-}
-*/
 
 @end

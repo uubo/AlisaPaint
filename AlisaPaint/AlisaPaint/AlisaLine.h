@@ -12,6 +12,6 @@
 @property (nonatomic) CGPoint point1;
 @property (nonatomic) CGPoint point2;
 
-- (instancetype)initWithColor:(UIColor *)color point1:(CGPoint)point1 point2:(CGPoint)point2;
+- (instancetype)initWithRGBA:(AlisaRGBA)rgba point1:(CGPoint)point1 point2:(CGPoint)point2;
 
 @end
