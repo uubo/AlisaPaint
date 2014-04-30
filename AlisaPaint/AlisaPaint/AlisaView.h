@@ -15,4 +15,6 @@
 - (void)addFigures:(NSArray *)figures;
 - (void)drawFigure:(AlisaFigure *)figure;
 
+- (NSArray *)figuresFromIndex:(NSUInteger)index;
+
 @end

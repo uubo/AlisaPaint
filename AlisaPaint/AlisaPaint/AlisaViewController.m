@@ -11,16 +11,82 @@
 #import "AlisaPoint.h"
 #import "AlisaLine.h"
 
-@interface AlisaViewController () <UIScrollViewDelegate>
+@interface AlisaViewController () <UIScrollViewDelegate, NSStreamDelegate>
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
-@property (weak, nonatomic) IBOutlet UIPanGestureRecognizer *panRecognizer;
 @property (weak, nonatomic) IBOutlet AlisaView *alisaView;
+@property (weak, nonatomic) IBOutlet UIPanGestureRecognizer *panRecognizer;
 @property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *figureButtons;
+
 @property (nonatomic) AlisaFigureType figureType;
 @property (strong, nonatomic) UIColor *activeColor;
+@property (nonatomic) NSUInteger freshIndex;
+
+@property (strong, nonatomic) NSInputStream *inputStream;
+@property (strong, nonatomic) NSOutputStream *outputStream;
 @end
 
 @implementation AlisaViewController
+
+- (IBAction)sendButtonTouched
+{
+    NSArray *figuresToSend = [self.alisaView figuresFromIndex:self.freshIndex];
+    [self sendFigures:figuresToSend];
+    self.freshIndex += figuresToSend.count;
+}
+
+- (void)stream:(NSStream *)theStream handleEvent:(NSStreamEvent)streamEvent {
+    
+	switch (streamEvent) {
+            
+		case NSStreamEventOpenCompleted:
+			NSLog(@"Stream opened");
+			break;
+            
+		case NSStreamEventHasBytesAvailable:
+            if (theStream == self.inputStream) {
+                
+                uint8_t buffer[1024];
+                int len;
+                
+                while ([self.inputStream hasBytesAvailable]) {
+                    len = [self.inputStream read:buffer maxLength:sizeof(buffer)];
+                    if (len > 0) {
+                        NSData *receivedData = [NSData dataWithBytes:buffer length:len];
+                        [self receiveFigures:receivedData];
+                    }
+                }
+            }
+			break;
+            
+		case NSStreamEventErrorOccurred:
+			NSLog(@"Can not connect to the host!");
+			break;
+            
+		case NSStreamEventEndEncountered:
+			break;
+            
+		default:
+			NSLog(@"Unknown event");
+	}
+    
+}
+
+- (void)initNetworkCommunication {
+    CFReadStreamRef readStream;
+    CFWriteStreamRef writeStream;
+    CFStreamCreatePairWithSocketToHost(NULL, (CFStringRef)@"localhost", 10022, &readStream, &writeStream);
+    self.inputStream = (__bridge NSInputStream *)readStream;
+    self.outputStream = (__bridge NSOutputStream *)writeStream;
+    
+    [self.inputStream setDelegate:self];
+    [self.outputStream setDelegate:self];
+    
+    [self.inputStream scheduleInRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
+    [self.outputStream scheduleInRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
+    
+    [self.inputStream open];
+    [self.outputStream open];
+}
 
 - (void)receiveFigures:(NSData *)figuresData
 {
@@ -30,7 +96,8 @@
 
 - (void)sendFigures:(NSArray *)figures
 {
-    __unused NSData *figuresData = [NSKeyedArchiver archivedDataWithRootObject:figures];
+    NSData *figuresData = [NSKeyedArchiver archivedDataWithRootObject:figures];
+    [self.outputStream write:[figuresData bytes] maxLength:[figuresData length]];
 }
 
 #define SCREEN_SCALE_FACTOR 4
@@ -38,6 +105,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    [self initNetworkCommunication];
+    
     CGSize screenSize = [UIScreen mainScreen].bounds.size;
     CGSize imageSize = CGSizeMake(screenSize.width * SCREEN_SCALE_FACTOR, screenSize.height * SCREEN_SCALE_FACTOR);
     

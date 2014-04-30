@@ -18,6 +18,7 @@ public class AlisaServer {
             for (;;) {
                 Socket incoming = serverSocket.accept();
                 AlisaClient client = new AlisaClient(this, incoming);
+                System.out.println("Client connected");
                 clients.add(client);
                 client.start();
             }
@@ -28,10 +29,11 @@ public class AlisaServer {
 
     public void send(byte[] buffer, AlisaClient clientSender)
     {
+        System.out.println(buffer);
         for (AlisaClient client : this.clients) {
-            if (client != clientSender) {
+            //if (client != clientSender) {
                 client.send(buffer);
-            }
+            //}
         }
     }
 }

@@ -16,6 +16,12 @@
 
 @implementation AlisaView
 
+- (NSArray *)figuresFromIndex:(NSUInteger)index
+{
+    return [self.figures subarrayWithRange:NSMakeRange(index,
+                                                       self.figures.count - index)];
+}
+
 #pragma mark Drawing
 
 - (void)addFigure:(AlisaFigure *)figure
