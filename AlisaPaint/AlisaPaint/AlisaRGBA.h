@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface AlisaRGBA : NSObject
+@interface AlisaRGBA : NSObject <NSCoding>
 
 @property (nonatomic) CGFloat red;
 @property (nonatomic) CGFloat green;
@@ -16,5 +16,8 @@
 @property (nonatomic) CGFloat alpha;
 
 - (instancetype)initWithRed:(CGFloat)red green:(CGFloat)green blue:(CGFloat)blue alpha:(CGFloat)alpha;
+
+- (instancetype)initWithCoder:(NSCoder *)aDecoder;
+- (void)encodeWithCoder:(NSCoder *)aCoder;
 
 @end

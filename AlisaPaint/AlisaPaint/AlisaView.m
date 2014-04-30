@@ -42,6 +42,13 @@
     });
 }
 
+- (void)addFigures:(NSArray *)figures
+{
+    for (AlisaFigure *figure in figures) {
+        [self addFigure:figure];
+    }
+}
+
 - (void)drawFigure:(AlisaFigure *)figure
 {
     if ([figure isMemberOfClass:[AlisaPoint class]]) {

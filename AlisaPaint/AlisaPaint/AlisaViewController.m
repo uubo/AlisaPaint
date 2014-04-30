@@ -22,6 +22,17 @@
 
 @implementation AlisaViewController
 
+- (void)receiveFigures:(NSData *)figuresData
+{
+    NSArray *figures = [NSKeyedUnarchiver unarchiveObjectWithData:figuresData];
+    [self.alisaView addFigures:figures];
+}
+
+- (void)sendFigures:(NSArray *)figures
+{
+    __unused NSData *figuresData = [NSKeyedArchiver archivedDataWithRootObject:figures];
+}
+
 #define SCREEN_SCALE_FACTOR 4
 
 - (void)viewDidLoad

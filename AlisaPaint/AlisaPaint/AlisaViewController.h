@@ -17,4 +17,7 @@ typedef enum : NSUInteger {
 
 @interface AlisaViewController : UIViewController
 
+- (void)receiveFigures:(NSData *)figuresData;
+- (void)sendFigures:(NSArray *)figures;
+
 @end

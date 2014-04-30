@@ -12,6 +12,7 @@
 @interface AlisaView : UIImageView
 
 - (void)addFigure:(AlisaFigure *)figure;
+- (void)addFigures:(NSArray *)figures;
 - (void)drawFigure:(AlisaFigure *)figure;
 
 @end
