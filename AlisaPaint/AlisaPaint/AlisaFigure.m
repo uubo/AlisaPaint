@@ -8,25 +8,31 @@
 
 #import "AlisaFigure.h"
 
-AlisaRGBA AlisaRGBAMake(CGFloat r, CGFloat g, CGFloat b, CGFloat a)
-{
-    AlisaRGBA rgba;
-    rgba.r = r;
-    rgba.g = g;
-    rgba.b = b;
-    rgba.a = a;
-    return rgba;
-}
-
 @implementation AlisaFigure
 
-- (instancetype)initWithRGBA:(AlisaRGBA)rgba
+- (instancetype)initWithRGBA:(AlisaRGBA *)rgba
 {
     self = [super init];
     if (self) {
         self.rgba = rgba;
     }
     return self;
+}
+
+NSString *AlisaFigureRGBA = @"AlisaFigureRGBA";
+
+- (instancetype)initWithCoder:(NSCoder *)aDecoder
+{
+    self = [super init];
+    if (self) {
+        _rgba = [aDecoder decodeObjectForKey:AlisaFigureRGBA];
+    }
+    return self;
+}
+
+- (void)encodeWithCoder:(NSCoder *)aCoder
+{
+    [aCoder encodeObject:self.rgba forKey:AlisaFigureRGBA];
 }
 
 @end

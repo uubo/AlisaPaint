@@ -11,6 +11,6 @@
 @interface AlisaPoint : AlisaFigure
 @property (nonatomic) CGPoint point;
 
-- (instancetype)initWithRGBA:(AlisaRGBA)rgba point:(CGPoint)point;
+- (instancetype)initWithRGBA:(AlisaRGBA *)rgba point:(CGPoint)point;
 
 @end

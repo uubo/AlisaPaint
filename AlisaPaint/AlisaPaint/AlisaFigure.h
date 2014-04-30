@@ -7,19 +7,15 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "AlisaRGBA.h"
 
-typedef struct {
-    CGFloat r;
-    CGFloat g;
-    CGFloat b;
-    CGFloat a;
-} AlisaRGBA;
+@interface AlisaFigure : NSObject <NSCoding>
 
-AlisaRGBA AlisaRGBAMake(CGFloat r, CGFloat g, CGFloat b, CGFloat a);
+@property (strong, nonatomic) AlisaRGBA *rgba;
 
-@interface AlisaFigure : NSObject
-@property (nonatomic) AlisaRGBA rgba;
+- (instancetype)initWithRGBA:(AlisaRGBA *)rgba;
 
-- (instancetype)initWithRGBA:(AlisaRGBA)rgba;
+- (instancetype)initWithCoder:(NSCoder *)aDecoder;
+- (void)encodeWithCoder:(NSCoder *)aCoder;
 
 @end

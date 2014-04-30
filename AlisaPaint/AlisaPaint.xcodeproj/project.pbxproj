@@ -10,6 +10,7 @@
 		F58723A919056CAF00F560AC /* AlisaFigure.m in Sources */ = {isa = PBXBuildFile; fileRef = F58723A819056CAF00F560AC /* AlisaFigure.m */; };
 		F58723AC19056DB700F560AC /* AlisaPoint.m in Sources */ = {isa = PBXBuildFile; fileRef = F58723AB19056DB700F560AC /* AlisaPoint.m */; };
 		F58723AF1905926600F560AC /* AlisaLine.m in Sources */ = {isa = PBXBuildFile; fileRef = F58723AE1905926600F560AC /* AlisaLine.m */; };
+		F5A856BF1911024300361474 /* AlisaRGBA.m in Sources */ = {isa = PBXBuildFile; fileRef = F5A856BE1911024300361474 /* AlisaRGBA.m */; };
 		F5ADD9E7190132C1005D1B5C /* AlisaView.m in Sources */ = {isa = PBXBuildFile; fileRef = F5ADD9E6190132C1005D1B5C /* AlisaView.m */; };
 		F5D673591900100200E7D1FE /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F5D673581900100200E7D1FE /* Foundation.framework */; };
 		F5D6735B1900100200E7D1FE /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F5D6735A1900100200E7D1FE /* CoreGraphics.framework */; };
@@ -44,6 +45,8 @@
 		F58723AB19056DB700F560AC /* AlisaPoint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlisaPoint.m; sourceTree = "<group>"; };
 		F58723AD1905926600F560AC /* AlisaLine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlisaLine.h; sourceTree = "<group>"; };
 		F58723AE1905926600F560AC /* AlisaLine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlisaLine.m; sourceTree = "<group>"; };
+		F5A856BD1911024300361474 /* AlisaRGBA.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlisaRGBA.h; sourceTree = "<group>"; };
+		F5A856BE1911024300361474 /* AlisaRGBA.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlisaRGBA.m; sourceTree = "<group>"; };
 		F5ADD9E5190132C1005D1B5C /* AlisaView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlisaView.h; sourceTree = "<group>"; };
 		F5ADD9E6190132C1005D1B5C /* AlisaView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlisaView.m; sourceTree = "<group>"; };
 		F5D673551900100200E7D1FE /* AlisaPaint.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AlisaPaint.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -91,6 +94,21 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		F5A856BC1910FFAE00361474 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				F5A856BD1911024300361474 /* AlisaRGBA.h */,
+				F5A856BE1911024300361474 /* AlisaRGBA.m */,
+				F58723A719056CAF00F560AC /* AlisaFigure.h */,
+				F58723A819056CAF00F560AC /* AlisaFigure.m */,
+				F58723AA19056DB700F560AC /* AlisaPoint.h */,
+				F58723AB19056DB700F560AC /* AlisaPoint.m */,
+				F58723AD1905926600F560AC /* AlisaLine.h */,
+				F58723AE1905926600F560AC /* AlisaLine.m */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
 		F5D6734C1900100200E7D1FE = {
 			isa = PBXGroup;
 			children = (
@@ -124,17 +142,12 @@
 		F5D6735E1900100200E7D1FE /* AlisaPaint */ = {
 			isa = PBXGroup;
 			children = (
+				F5A856BC1910FFAE00361474 /* Model */,
 				F5D6736A1900100200E7D1FE /* Main.storyboard */,
 				F5D6736D1900100200E7D1FE /* AlisaViewController.h */,
 				F5D6736E1900100200E7D1FE /* AlisaViewController.m */,
 				F5ADD9E5190132C1005D1B5C /* AlisaView.h */,
 				F5ADD9E6190132C1005D1B5C /* AlisaView.m */,
-				F58723A719056CAF00F560AC /* AlisaFigure.h */,
-				F58723A819056CAF00F560AC /* AlisaFigure.m */,
-				F58723AA19056DB700F560AC /* AlisaPoint.h */,
-				F58723AB19056DB700F560AC /* AlisaPoint.m */,
-				F58723AD1905926600F560AC /* AlisaLine.h */,
-				F58723AE1905926600F560AC /* AlisaLine.m */,
 				F5D673701900100200E7D1FE /* Images.xcassets */,
 				F5D6735F1900100200E7D1FE /* Supporting Files */,
 			);
@@ -274,6 +287,7 @@
 				F58723AF1905926600F560AC /* AlisaLine.m in Sources */,
 				F5D6736F1900100200E7D1FE /* AlisaViewController.m in Sources */,
 				F5D673691900100200E7D1FE /* AlisaAppDelegate.m in Sources */,
+				F5A856BF1911024300361474 /* AlisaRGBA.m in Sources */,
 				F58723AC19056DB700F560AC /* AlisaPoint.m in Sources */,
 				F5ADD9E7190132C1005D1B5C /* AlisaView.m in Sources */,
 				F58723A919056CAF00F560AC /* AlisaFigure.m in Sources */,

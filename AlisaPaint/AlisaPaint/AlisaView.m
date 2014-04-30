@@ -62,7 +62,10 @@
                                                     startAngle:0
                                                       endAngle:2*M_PI
                                                      clockwise:YES];
-    UIColor *color = [UIColor colorWithRed:alisaPoint.rgba.r green:alisaPoint.rgba.g blue:alisaPoint.rgba.b alpha:alisaPoint.rgba.a];
+    UIColor *color = [UIColor colorWithRed:alisaPoint.rgba.red
+                                     green:alisaPoint.rgba.green
+                                      blue:alisaPoint.rgba.blue
+                                     alpha:alisaPoint.rgba.alpha];
     [color setFill];
     [path fill];
 }
@@ -73,7 +76,11 @@
     [path moveToPoint:alisaLine.point1];
     [path addLineToPoint:alisaLine.point2];
     
-    [[UIColor colorWithRed:alisaLine.rgba.r green:alisaLine.rgba.g blue:alisaLine.rgba.b alpha:alisaLine.rgba.a] setStroke];
+    UIColor *color = [UIColor colorWithRed:alisaLine.rgba.red
+                                     green:alisaLine.rgba.green
+                                      blue:alisaLine.rgba.blue
+                                     alpha:alisaLine.rgba.alpha];
+    [color setStroke];
     [path stroke];
 }
 

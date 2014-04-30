@@ -49,11 +49,11 @@
     }
     return _activeColor;
 }
-- (AlisaRGBA)activeColorRGBA
+- (AlisaRGBA *)activeColorRGBA
 {
     CGFloat r, g, b, a;
     [self.activeColor getRed:&r green:&g blue:&b alpha:&a];
-    return AlisaRGBAMake(r, g, b, a);
+    return [[AlisaRGBA alloc] initWithRed:r green:g blue:b alpha:a];
 }
 
 - (UIView *)viewForZoomingInScrollView:(UIScrollView *)scrollView
