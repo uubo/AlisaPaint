@@ -36,4 +36,9 @@ public class AlisaServer {
             //}
         }
     }
+
+    public void removeClient(AlisaClient client)
+    {
+        clients.remove(client);
+    }
 }

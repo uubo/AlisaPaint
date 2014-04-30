@@ -36,6 +36,7 @@ public class AlisaClient extends Thread {
                 }
             }
             socket.close();
+            server.removeClient(this);
         } catch (IOException e) {
             e.printStackTrace();
         }
