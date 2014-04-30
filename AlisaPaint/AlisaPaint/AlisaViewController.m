@@ -22,6 +22,26 @@
 
 @implementation AlisaViewController
 
+#define SCREEN_SCALE_FACTOR 4
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    CGSize screenSize = [UIScreen mainScreen].bounds.size;
+    CGSize imageSize = CGSizeMake(screenSize.width * SCREEN_SCALE_FACTOR, screenSize.height * SCREEN_SCALE_FACTOR);
+    
+    UIGraphicsBeginImageContextWithOptions(imageSize, NO, [UIScreen mainScreen].scale);
+    UIImage *startImage = UIGraphicsGetImageFromCurrentImageContext();
+    self.alisaView.image = startImage;
+    UIGraphicsEndImageContext();
+    [self.alisaView sizeToFit];
+    
+    self.scrollView.minimumZoomScale = 1.0;
+    self.scrollView.maximumZoomScale = 4.0;
+    self.scrollView.delegate = self;
+    self.scrollView.contentSize = imageSize;
+}
+
 - (UIColor *)activeColor
 {
     if (!_activeColor) {
@@ -32,17 +52,8 @@
 - (AlisaRGBA)activeColorRGBA
 {
     CGFloat r, g, b, a;
-    [self.activeColor getRed:&r green:&g blue:&g alpha:&a];
+    [self.activeColor getRed:&r green:&g blue:&b alpha:&a];
     return AlisaRGBAMake(r, g, b, a);
-}
-
-- (void)setScrollView:(UIScrollView *)scrollView
-{
-    _scrollView = scrollView;
-    self.scrollView.minimumZoomScale = 1.0;
-    self.scrollView.maximumZoomScale = 4.0;
-    self.scrollView.delegate = self;
-    self.scrollView.contentSize = self.alisaView ? self.alisaView.bounds.size : CGSizeZero;
 }
 
 - (UIView *)viewForZoomingInScrollView:(UIScrollView *)scrollView

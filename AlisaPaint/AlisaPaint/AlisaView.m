@@ -28,7 +28,7 @@
     dispatch_async(onImageDrawingQueue, ^{
         UIGraphicsBeginImageContextWithOptions(weakSelf.bounds.size, NO, [UIScreen mainScreen].scale);
         
-        for (AlisaFigure *figure in weakSelf.figures) {
+        for (AlisaFigure *figure in [weakSelf.figures copy]) {
             [self drawFigure:figure];
         }
         
@@ -62,7 +62,8 @@
                                                     startAngle:0
                                                       endAngle:2*M_PI
                                                      clockwise:YES];
-    [[UIColor colorWithRed:alisaPoint.rgba.r green:alisaPoint.rgba.g blue:alisaPoint.rgba.b alpha:alisaPoint.rgba.a] setFill];
+    UIColor *color = [UIColor colorWithRed:alisaPoint.rgba.r green:alisaPoint.rgba.g blue:alisaPoint.rgba.b alpha:alisaPoint.rgba.a];
+    [color setFill];
     [path fill];
 }
 
