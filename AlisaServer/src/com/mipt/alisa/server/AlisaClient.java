@@ -1,18 +1,18 @@
-package com.mipt;
+package com.mipt.alisa.server;
 
 import java.io.*;
 import java.net.Socket;
 
 public class AlisaClient extends Thread {
 
-    private AlisaServer server;
+    private AlisaRoom room;
     private Socket socket;
     private InputStream in;
     private OutputStream out;
 
-    public AlisaClient(AlisaServer server, Socket socket)
+    public AlisaClient(AlisaRoom room, Socket socket)
     {
-        this.server = server;
+        this.room = room;
         this.socket = socket;
     }
 
@@ -29,14 +29,14 @@ public class AlisaClient extends Thread {
                 if (bytesAvailable > 0) {
                     byte[] buffer = new byte[bytesAvailable];
                     if (in.read(buffer) != -1) {
-                        server.send(buffer, this);
+                        room.sendMessageFrom(this, buffer);
                     } else {
                         done = true;
                     }
                 }
             }
             socket.close();
-            server.removeClient(this);
+            room.removeClient(this);
         } catch (IOException e) {
             e.printStackTrace();
         }

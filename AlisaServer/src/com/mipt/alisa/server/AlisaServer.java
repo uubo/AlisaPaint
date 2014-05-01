@@ -1,4 +1,4 @@
-package com.mipt;
+package com.mipt.alisa.server;
 
 import java.io.IOException;
 import java.net.ServerSocket;
@@ -9,7 +9,8 @@ import java.util.List;
 public class AlisaServer {
 
     private List<AlisaClient> clients = new ArrayList<AlisaClient>();
-    public static int PORT = 10022;
+    private AlisaRoom globalRoom = new AlisaRoom(this);
+    public static int PORT = 10023;
 
     public void start()
     {
@@ -17,28 +18,22 @@ public class AlisaServer {
             ServerSocket serverSocket = new ServerSocket(PORT);
             for (;;) {
                 Socket incoming = serverSocket.accept();
-                AlisaClient client = new AlisaClient(this, incoming);
-                System.out.println("Client connected");
-                clients.add(client);
+                AlisaClient client = new AlisaClient(globalRoom, incoming);
                 client.start();
+
+                System.out.printf("Client %d connected\n", clients.size());
+                clients.add(client);
+                globalRoom.addClient(client);
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    public void send(byte[] buffer, AlisaClient clientSender)
-    {
-        System.out.println(buffer);
-        for (AlisaClient client : this.clients) {
-            //if (client != clientSender) {
-                client.send(buffer);
-            //}
-        }
-    }
-
     public void removeClient(AlisaClient client)
     {
-        clients.remove(client);
+        int clientIndex = clients.indexOf(client);
+        System.out.printf("Client %d disconnected\n", clientIndex);
+        clients.remove(clientIndex);
     }
 }

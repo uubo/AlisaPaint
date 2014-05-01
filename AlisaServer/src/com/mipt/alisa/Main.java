@@ -1,4 +1,6 @@
-package com.mipt;
+package com.mipt.alisa;
+
+import com.mipt.alisa.server.AlisaServer;
 
 public class Main {
 
