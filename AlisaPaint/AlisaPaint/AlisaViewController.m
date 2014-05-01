@@ -71,10 +71,11 @@
     
 }
 
-- (void)initNetworkCommunication {
+- (void)initNetworkCommunication
+{
     CFReadStreamRef readStream;
     CFWriteStreamRef writeStream;
-    CFStreamCreatePairWithSocketToHost(NULL, (CFStringRef)@"localhost", 10022, &readStream, &writeStream);
+    CFStreamCreatePairWithSocketToHost(NULL, (CFStringRef)@"localhost", 10023, &readStream, &writeStream);
     self.inputStream = (__bridge NSInputStream *)readStream;
     self.outputStream = (__bridge NSOutputStream *)writeStream;
     
