@@ -12,6 +12,7 @@
 		F58723AF1905926600F560AC /* AlisaLine.m in Sources */ = {isa = PBXBuildFile; fileRef = F58723AE1905926600F560AC /* AlisaLine.m */; };
 		F5A856BF1911024300361474 /* AlisaRGBA.m in Sources */ = {isa = PBXBuildFile; fileRef = F5A856BE1911024300361474 /* AlisaRGBA.m */; };
 		F5ADD9E7190132C1005D1B5C /* AlisaView.m in Sources */ = {isa = PBXBuildFile; fileRef = F5ADD9E6190132C1005D1B5C /* AlisaView.m */; };
+		F5D0C47D1912DE550011AB98 /* AlisaHttpRequestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F5D0C47C1912DE550011AB98 /* AlisaHttpRequestViewController.m */; };
 		F5D673591900100200E7D1FE /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F5D673581900100200E7D1FE /* Foundation.framework */; };
 		F5D6735B1900100200E7D1FE /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F5D6735A1900100200E7D1FE /* CoreGraphics.framework */; };
 		F5D6735D1900100200E7D1FE /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F5D6735C1900100200E7D1FE /* UIKit.framework */; };
@@ -49,6 +50,8 @@
 		F5A856BE1911024300361474 /* AlisaRGBA.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlisaRGBA.m; sourceTree = "<group>"; };
 		F5ADD9E5190132C1005D1B5C /* AlisaView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlisaView.h; sourceTree = "<group>"; };
 		F5ADD9E6190132C1005D1B5C /* AlisaView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlisaView.m; sourceTree = "<group>"; };
+		F5D0C47B1912DE550011AB98 /* AlisaHttpRequestViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlisaHttpRequestViewController.h; sourceTree = "<group>"; };
+		F5D0C47C1912DE550011AB98 /* AlisaHttpRequestViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlisaHttpRequestViewController.m; sourceTree = "<group>"; };
 		F5D673551900100200E7D1FE /* AlisaPaint.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AlisaPaint.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F5D673581900100200E7D1FE /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		F5D6735A1900100200E7D1FE /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -105,6 +108,8 @@
 				F58723AB19056DB700F560AC /* AlisaPoint.m */,
 				F58723AD1905926600F560AC /* AlisaLine.h */,
 				F58723AE1905926600F560AC /* AlisaLine.m */,
+				F5D0C47B1912DE550011AB98 /* AlisaHttpRequestViewController.h */,
+				F5D0C47C1912DE550011AB98 /* AlisaHttpRequestViewController.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -291,6 +296,7 @@
 				F58723AC19056DB700F560AC /* AlisaPoint.m in Sources */,
 				F5ADD9E7190132C1005D1B5C /* AlisaView.m in Sources */,
 				F58723A919056CAF00F560AC /* AlisaFigure.m in Sources */,
+				F5D0C47D1912DE550011AB98 /* AlisaHttpRequestViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
