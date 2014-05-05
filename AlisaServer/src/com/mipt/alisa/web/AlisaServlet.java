@@ -2,6 +2,7 @@ package com.mipt.alisa.web;
 
 import com.mipt.alisa.socketserver.AlisaServer;
 
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -14,7 +15,7 @@ import java.util.List;
 
 public class AlisaServlet extends HttpServlet
 {
-    private AlisaServer alisaServer;
+    //private AlisaServer alisaServer;
 
     private static String goalParameter = "goal";
     private static String registrationGoal = "reg";
@@ -28,19 +29,6 @@ public class AlisaServlet extends HttpServlet
     private static String passwordParameter = "pass";
     private static String userLoginParameter = "user_login";
     private static String friendLoginParameter = "friend_login";
-
-    @Override
-    public void init() throws ServletException
-    {
-        super.init();
-        initDrawingServer();
-    }
-
-    private void initDrawingServer()
-    {
-        alisaServer = new AlisaServer();
-        alisaServer.start();
-    }
 
     private Connection getConnection() throws ClassNotFoundException, SQLException {
         // this will load the MySQL driver, each DB has its own driver
@@ -82,7 +70,10 @@ public class AlisaServlet extends HttpServlet
             getFriends(login, resp);
         }
         else if (goal.equalsIgnoreCase(startDialogGoal)) {
-
+            String login = req.getParameter(loginParameter);
+            ServletContext context = req.getServletContext();
+            AlisaServer alisaServer = (AlisaServer)context.getAttribute("AlisaServer");
+            alisaServer.createRoom(new ArrayList<String>());
         }
     }
 

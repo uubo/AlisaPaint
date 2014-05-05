@@ -14,4 +14,8 @@
         <servlet-name>AlisaServlet</servlet-name>
         <url-pattern>/alisa</url-pattern>
     </servlet-mapping>
+
+    <listener>
+        <listener-class>com.mipt.alisa.web.AlisaServletContextListener</listener-class>
+    </listener>
 </web-app>

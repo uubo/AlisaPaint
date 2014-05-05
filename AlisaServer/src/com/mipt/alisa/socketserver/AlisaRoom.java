@@ -33,9 +33,9 @@ public class AlisaRoom
     public void sendMessageFrom(AlisaClient sender, byte[] message)
     {
         for (AlisaClient client : this.clients) {
-            if (client != sender) {
+            //if (client != sender) {
                 client.send(message);
-            }
+            //}
         }
         messages.add(message);
     }
