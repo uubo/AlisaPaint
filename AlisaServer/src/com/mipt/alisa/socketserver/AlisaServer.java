@@ -13,30 +13,24 @@ public class AlisaServer extends Thread{
 
     private List<AlisaClient> clients = new ArrayList<AlisaClient>();
     private List<AlisaRoom> rooms = new ArrayList<AlisaRoom>();
-    private Map<String, AlisaRoom> clientsRooms = new HashMap<String, AlisaRoom>();
-    private AlisaRoom globalRoom = new AlisaRoom(this);
-    private AlisaClient testClient = new AlisaClient(null, null);
+    private Map<String, AlisaClient> logins = new HashMap<String, AlisaClient>();
 
-    public static int PORT = 21021;
+    public static final int PORT = 21022;
 
     @Override
     public void run()
     {
         System.out.println("AlisaServer: Starting...");
-        AlisaRoom testRoom = new AlisaRoom(this);
-        clientsRooms.put("login", testRoom);
-        rooms.add(testRoom);
 
         try {
             ServerSocket serverSocket = new ServerSocket(PORT);
             for (;;) {
                 Socket incoming = serverSocket.accept();
-                AlisaClient client = new AlisaClient(globalRoom, incoming);
+                AlisaClient client = new AlisaClient(this, incoming);
                 client.start();
 
                 System.out.printf("AlisaServer: Client %d connected\n", clients.size());
                 clients.add(client);
-                globalRoom.addClient(client);
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -50,22 +44,23 @@ public class AlisaServer extends Thread{
         clients.remove(clientIndex);
     }
 
-    public void createRoom(List<String> logins)
+    public void addClientLogin(AlisaClient client, String login)
     {
-        AlisaRoom newRoom = new AlisaRoom(this);
-        rooms.add(newRoom);
-        for (String login : logins) {
-            clientsRooms.put(login, newRoom);
+        logins.put(login, client);
+        client.sendIdentificationCompleted(true);
+    }
+
+    public void createRoom(String creatorLogin, List<String> loginsInRoom)
+    {
+        AlisaClient creator = logins.get(creatorLogin);
+        creator.sendRoomCreationCompleted(true);
+
+        for (String login : loginsInRoom) {
+            AlisaClient client = logins.get(login);
+            client.sendYouAreAddedToTheRoom();
         }
     }
 
-    public AlisaRoom defineClientsRoom(AlisaClient client)
-    {
-        String login = client.getLogin();
-        AlisaRoom room = clientsRooms.get(login);
-        room.addClient(client);
-        return room;
-    }
     public static void main(String[] args)
     {
         AlisaServer server = new AlisaServer();

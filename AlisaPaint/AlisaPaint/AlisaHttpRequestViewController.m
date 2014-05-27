@@ -20,7 +20,7 @@
 
 @implementation AlisaHttpRequestViewController
 
-NSString *server = @"http://localhost:8080/web_war_exploded/alisa";
+static NSString *server = @"http://localhost:8080/web_war_exploded/alisa";
 
 static NSString *goalParameter = @"goal";
 static NSString *registrationGoal = @"reg";

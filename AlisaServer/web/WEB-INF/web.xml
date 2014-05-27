@@ -7,7 +7,7 @@
     <servlet>
         <servlet-name>AlisaServlet</servlet-name>
         <servlet-class>com.mipt.alisa.web.AlisaServlet</servlet-class>
-        <load-on-startup>1</load-on-startup>
+        <!--<load-on-startup>1</load-on-startup>-->
     </servlet>
     
     <servlet-mapping>

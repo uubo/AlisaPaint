@@ -23,7 +23,6 @@ public class AlisaServlet extends HttpServlet
     private static String findUserGoal = "find";
     private static String addFriendGoal = "add";
     private static String getFriendsGoal = "getf";
-    private static String startDialogGoal = "start";
 
     private static String loginParameter = "login";
     private static String passwordParameter = "pass";
@@ -68,12 +67,6 @@ public class AlisaServlet extends HttpServlet
         {
             String login = req.getParameter(loginParameter);
             getFriends(login, resp);
-        }
-        else if (goal.equalsIgnoreCase(startDialogGoal)) {
-            String login = req.getParameter(loginParameter);
-            ServletContext context = req.getServletContext();
-            AlisaServer alisaServer = (AlisaServer)context.getAttribute("AlisaServer");
-            alisaServer.createRoom(new ArrayList<String>());
         }
     }
 
@@ -232,9 +225,5 @@ public class AlisaServlet extends HttpServlet
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
-
-    private void startDialog()
-    {
     }
 }

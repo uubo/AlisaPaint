@@ -75,7 +75,7 @@
 {
     CFReadStreamRef readStream;
     CFWriteStreamRef writeStream;
-    CFStreamCreatePairWithSocketToHost(NULL, (CFStringRef)@"localhost", 10023, &readStream, &writeStream);
+    CFStreamCreatePairWithSocketToHost(NULL, (CFStringRef)@"localhost", 21022, &readStream, &writeStream);
     self.inputStream = (__bridge NSInputStream *)readStream;
     self.outputStream = (__bridge NSOutputStream *)writeStream;
     
@@ -92,6 +92,7 @@
 - (void)receiveFigures:(NSData *)figuresData
 {
     NSArray *figures = [NSKeyedUnarchiver unarchiveObjectWithData:figuresData];
+    NSLog(@"Received %d figures", figures.count);
     [self.alisaView addFigures:figures];
 }
 
@@ -101,6 +102,42 @@
     [self.outputStream write:[figuresData bytes] maxLength:[figuresData length]];
 }
 
+typedef enum {
+    AlisaCreateRoomMessage = 1
+} AlisaMessageType;
+
+- (void)sendMessage:(NSData *)message
+{
+    uint32_t size = message.length;
+    size = htonl(size); //from little endian to big endian
+    NSMutableData *fullMessage = [NSMutableData data];
+    [fullMessage appendBytes:&size length:sizeof(size)];
+    [fullMessage appendData:message];
+    [self.outputStream write:[fullMessage bytes] maxLength:[fullMessage length]];
+}
+
+- (void)sendCreateRoomMessage:(NSArray *)users
+{
+    int16_t type = AlisaCreateRoomMessage;
+    type = htons(type);
+    
+    NSMutableData *message = [NSMutableData dataWithBytes:&type length:sizeof(type)];
+    
+    int16_t usersNumber = users.count;
+    usersNumber = htons(usersNumber);
+    [message appendBytes:&usersNumber length:sizeof(usersNumber)];
+    
+    for (NSString *user in users) {
+        NSData *loginData = [user dataUsingEncoding:NSUTF8StringEncoding];
+        int16_t loginSize = loginData.length;
+        loginSize = htons(loginSize);
+        [message appendBytes:&loginSize length:sizeof(loginSize)];
+        [message appendData:loginData];
+    }
+    
+    [self sendMessage:message];
+}
+
 #define SCREEN_SCALE_FACTOR 4
 
 - (void)viewDidLoad
@@ -108,6 +145,7 @@
     [super viewDidLoad];
     
     [self initNetworkCommunication];
+    [self sendCreateRoomMessage:@[@"Sasha", @"Vova", @"Petya", @"Dima"]];
     
     CGSize screenSize = [UIScreen mainScreen].bounds.size;
     CGSize imageSize = CGSizeMake(screenSize.width * SCREEN_SCALE_FACTOR, screenSize.height * SCREEN_SCALE_FACTOR);
